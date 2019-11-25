@@ -6,7 +6,12 @@ const main = function() {
   const path = "./transactionData.json";
   const args = process.argv.slice(2);
   const date = new Date().toJSON();
-  const message = transactionRecorder(path, args, date, fs);
+  const fsi = {
+    readFileSync: fs.readFileSync,
+    writeFileSync: fs.writeFileSync,
+    existsSync: fs.existsSync
+  };
+  const message = transactionRecorder(path, args, date, fsi);
   console.log(message);
   return;
 };

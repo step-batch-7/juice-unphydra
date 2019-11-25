@@ -4,11 +4,22 @@ const transactionRecorder = optionLib.transactionRecorder;
 
 describe("transactionRecorder", () => {
   it("should give a message of transaction", () => {
+    const fs = {
+      readFileSync: x => {
+        return "{}";
+      },
+      writeFileSync: x => {
+        return undefined;
+      },
+      existsSync: x => {
+        return true;
+      }
+    };
     const actual = transactionRecorder(
       "./transactionData.json",
       [],
       232425,
-      "fs"
+      fs
     );
     const expected =
       "Transaction Recorded:\n" +

@@ -16,5 +16,13 @@ const argsProcesser = function(args) {
   return argsObj;
 };
 
+const getRecord = function(path, isFileExists, readFile, jsonParse) {
+  if (isFileExists(path)) {
+    return jsonParse(readFile(path, "utf8"));
+  }
+  return {};
+};
+
 exports.argsProcesser = argsProcesser;
 exports.isInvalidInput = isInvalidInput;
+exports.getRecord = getRecord;
