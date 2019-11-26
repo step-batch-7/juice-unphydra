@@ -11,7 +11,7 @@ describe("argsProcesser", () => {
       method: undefined,
       empId: undefined,
       beverage: undefined,
-      qty: undefined
+      qty: NaN
     };
     assert.deepStrictEqual(actual, expected);
   });
@@ -26,7 +26,7 @@ describe("isInvalidInput", () => {
 });
 
 describe("getRecord", () => {
-  it("should return an object contains records", () => {
+  it("should return records", () => {
     const isFileExists = function(path) {
       assert.equal(path, "path");
       return true;
@@ -43,7 +43,7 @@ describe("getRecord", () => {
     const expected = { a: 1 };
     assert.deepStrictEqual(actual, expected);
   });
-  it("should return an empty object", () => {
+  it("should give empty record", () => {
     const isFileExists = function(path) {
       assert.equal(path, "path");
       return false;

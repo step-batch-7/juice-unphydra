@@ -6,7 +6,7 @@ const parsingArgsToObject = function(args) {
   this.method = args[0];
   this.empId = args[4];
   this.beverage = args[2];
-  this.qty = args[6];
+  this.qty = +args[6];
 };
 
 const argsProcesser = function(args) {

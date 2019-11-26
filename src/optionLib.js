@@ -1,4 +1,5 @@
 const utils = require("../src/utilitiesLib.js");
+const performSave = require("./performSaveLib.js").performSave;
 
 const transactionRecorder = function(path, args, date, fs) {
   //if (utils.isInvalidInput(args)) {
@@ -12,6 +13,9 @@ const transactionRecorder = function(path, args, date, fs) {
     fs.readFileSync,
     JSON.parse
   );
+  if (processedArgs.method == "--save") {
+    let transactionDetails = performSave(records, processedArgs, date);
+  }
   return (
     "Transaction Recorded:\n" +
     "Employee ID,Beverage,Quantity,Date\n" +
