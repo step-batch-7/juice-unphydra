@@ -23,6 +23,12 @@ const getRecord = function(path, isFileExists, readFile, jsonParse) {
   return {};
 };
 
+const writeRecords = function(path, writeFile, records, jsonString, encoder) {
+  let recordString = jsonString(records, null, 2);
+  return writeFile(path, recordString, encoder);
+};
+
 exports.argsProcesser = argsProcesser;
 exports.isInvalidInput = isInvalidInput;
 exports.getRecord = getRecord;
+exports.writeRecords = writeRecords;

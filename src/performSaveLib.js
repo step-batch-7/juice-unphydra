@@ -9,7 +9,7 @@ const performSave = function(records, args, date) {
     return [savedTrans];
   }
   records[empId] = {};
-  records[empId].transaction = transDetails;
+  records[empId].transaction = [transDetails];
   records[empId].totalQty = qty;
   savedTrans = { empId, beverage, qty, date };
   return [savedTrans];

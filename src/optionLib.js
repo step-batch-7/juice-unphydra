@@ -15,6 +15,7 @@ const transactionRecorder = function(path, args, date, fs) {
   );
   if (processedArgs.method == "--save") {
     let transactionDetails = performSave(records, processedArgs, date);
+    utils.writeRecords(path, fs.writeFileSync, records, JSON.stringify, "utf8");
   }
   return (
     "Transaction Recorded:\n" +
