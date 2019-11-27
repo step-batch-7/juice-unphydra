@@ -11,11 +11,14 @@ const transactionRecorder = function(path, args, date, fs) {
     path,
     fs.existsSync,
     fs.readFileSync,
-    JSON.parse
+    JSON.parse,
+    "utf8"
   );
   if (processedArgs.method == "--save") {
     let transactionDetails = performSave(records, processedArgs, date);
     utils.writeRecords(path, fs.writeFileSync, records, JSON.stringify, "utf8");
+    let message = utils.generateMessage(transactionDetails);
+    return message;
   }
   return (
     "Transaction Recorded:\n" +

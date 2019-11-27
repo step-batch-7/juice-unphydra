@@ -16,9 +16,9 @@ const argsProcesser = function(args) {
   return argsObj;
 };
 
-const getRecord = function(path, isFileExists, readFile, jsonParse) {
+const getRecord = function(path, isFileExists, readFile, jsonParse, encoder) {
   if (isFileExists(path)) {
-    return jsonParse(readFile(path, "utf8"));
+    return jsonParse(readFile(path, encoder));
   }
   return {};
 };
@@ -28,7 +28,17 @@ const writeRecords = function(path, writeFile, records, jsonString, encoder) {
   return writeFile(path, recordString, encoder);
 };
 
+const generateMessage = function(transDetails) {
+  let { empId, beverage, qty, date } = transDetails[0];
+  let message = "Transaction Recorded:\n";
+  message = message + "Employee ID,Beverage,Quantity,Date\n";
+  message = message + empId + "," + beverage + ",";
+  message = message + qty + "," + date;
+  return message;
+};
+
 exports.argsProcesser = argsProcesser;
 exports.isInvalidInput = isInvalidInput;
 exports.getRecord = getRecord;
 exports.writeRecords = writeRecords;
+exports.generateMessage = generateMessage;

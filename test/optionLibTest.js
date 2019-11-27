@@ -3,7 +3,7 @@ const optionLib = require("../src/optionLib.js");
 const transactionRecorder = optionLib.transactionRecorder;
 
 describe("transactionRecorder", () => {
-  it("should give a message of transaction", () => {
+  it("should give a message of undefined transaction", () => {
     const fs = {
       readFileSync: x => {
         return "{}";
@@ -25,6 +25,32 @@ describe("transactionRecorder", () => {
       "Transaction Recorded:\n" +
       "Employee ID,Beverage,Quantity,Date\n" +
       "11111,Orange,1," +
+      232425;
+    assert.deepStrictEqual(actual, expected);
+  });
+  it("should give a undefined transaction of save action", () => {
+    const fs = {
+      readFileSync: x => {
+        return "{}";
+      },
+      writeFileSync: x => {
+        return undefined;
+      },
+      existsSync: x => {
+        return true;
+      }
+    };
+    const args = ["--save"];
+    const actual = transactionRecorder(
+      "./transactionData.json",
+      args,
+      232425,
+      fs
+    );
+    const expected =
+      "Transaction Recorded:\n" +
+      "Employee ID,Beverage,Quantity,Date\n" +
+      "undefined,undefined,undefined," +
       232425;
     assert.deepStrictEqual(actual, expected);
   });
