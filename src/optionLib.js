@@ -1,5 +1,6 @@
 const utils = require("../src/utilitiesLib.js");
 const performSave = require("./performSaveLib.js").performSave;
+const performQuery = require("./performQueryLib.js").performQuery;
 
 const transactionRecorder = function(path, args, date, fs) {
   let message = "";
@@ -19,14 +20,12 @@ const transactionRecorder = function(path, args, date, fs) {
     let transactionDetails = performSave(records, processedArgs, date);
     utils.writeRecords(path, fs.writeFileSync, records, JSON.stringify, "utf8");
     message = utils.generateMessage(transactionDetails);
+    message = "Transaction Recorded:\n" + message;
     return message;
   }
-  return (
-    "Transaction Recorded:\n" +
-    "Employee ID,Beverage,Quantity,Date\n" +
-    "11111,Orange,1," +
-    date
-  );
+  transactionDetails = performQuery(records, processedArgs);
+  message = utils.generateMessage(transactionDetails);
+  return message;
 };
 
 exports.transactionRecorder = transactionRecorder;

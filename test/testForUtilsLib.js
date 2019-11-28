@@ -31,10 +31,10 @@ describe("getRecord", () => {
     const readfile = function(path, encoder) {
       assert.deepStrictEqual(path, "path");
       assert.deepStrictEqual(encoder, "utf8");
-      return "{a:1}";
+      return "[{a:1}]";
     };
     const jsonParse = function(args) {
-      return { a: 1 };
+      return [{ a: 1 }];
     };
     const encoder = "utf8";
 
@@ -45,7 +45,7 @@ describe("getRecord", () => {
       jsonParse,
       encoder
     );
-    const expected = { a: 1 };
+    const expected = [{ a: 1 }];
     assert.deepStrictEqual(actual, expected);
   });
   it("should give empty record", () => {
@@ -56,10 +56,10 @@ describe("getRecord", () => {
     const readfile = function(path, encoder) {
       assert.deepStrictEqual(path, "path");
       assert.deepStrictEqual(encoder, "utf8");
-      return "{}";
+      return "[]";
     };
     const jsonParse = function(args) {
-      return {};
+      return [];
     };
     const encoder = "utf8";
 
@@ -70,7 +70,7 @@ describe("getRecord", () => {
       jsonParse,
       encoder
     );
-    const expected = {};
+    const expected = [];
     assert.deepStrictEqual(actual, expected);
   });
 });

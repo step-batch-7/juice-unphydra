@@ -20,7 +20,7 @@ const getRecord = function(path, isFileExists, readFile, jsonParse, encoder) {
   if (isFileExists(path)) {
     return jsonParse(readFile(path, encoder));
   }
-  return {};
+  return [];
 };
 
 const writeRecords = function(path, writeFile, records, jsonString, encoder) {
