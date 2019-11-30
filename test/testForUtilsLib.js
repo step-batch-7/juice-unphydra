@@ -1,26 +1,10 @@
 const assert = require("assert");
-const utils = require("../src/utilitiesLib.js");
-
-describe("argsProcesser", () => {
-  it("should return an object of four keys which contain values or undefined", () => {
-    const actual = utils.argsProcesser([]);
-    const expected = {
-      method: undefined,
-      empId: undefined,
-      beverage: undefined,
-      qty: NaN
-    };
-    assert.deepStrictEqual(actual, expected);
-  });
-});
-
-describe("isInvalidInput", () => {
-  it("should return false", () => {
-    const actual = utils.isInvalidInput([]);
-    const expected = false;
-    assert.deepStrictEqual(actual, expected);
-  });
-});
+const {
+  getRecord,
+  writeRecords,
+  generateMessage,
+  getTotalJuices
+} = require("../src/utilitiesLib.js");
 
 describe("getRecord", () => {
   it("should return records", () => {
@@ -38,7 +22,7 @@ describe("getRecord", () => {
     };
     const encoder = "utf8";
 
-    const actual = utils.getRecord(
+    const actual = getRecord(
       "path",
       isFileExists,
       readfile,
@@ -63,7 +47,7 @@ describe("getRecord", () => {
     };
     const encoder = "utf8";
 
-    const actual = utils.getRecord(
+    const actual = getRecord(
       "path",
       isFileExists,
       readfile,
@@ -93,13 +77,7 @@ describe("writeRecords", () => {
       return "{}";
     };
 
-    const actual = utils.writeRecords(
-      path,
-      writeFile,
-      records,
-      jsonString,
-      encoder
-    );
+    const actual = writeRecords(path, writeFile, records, jsonString, encoder);
     const expected = undefined;
     assert.deepStrictEqual(actual, expected);
     assert.deepStrictEqual(runCount, 1);
@@ -109,7 +87,7 @@ describe("writeRecords", () => {
 describe("generateMessage", () => {
   it("should give only heading if no transaction details is given", () => {
     const transactionDetails = [{}];
-    const actual = utils.generateMessage(transactionDetails);
+    const actual = generateMessage(transactionDetails);
     const expected =
       "Employee ID,Beverage,Quantity,Date\nundefined,undefined,undefined,undefined\n";
     assert.deepStrictEqual(actual, expected);
@@ -118,9 +96,32 @@ describe("generateMessage", () => {
     const transactionDetails = [
       { empId: 11111, beverage: "Orange", qty: 1, date: 1234 }
     ];
-    const actual = utils.generateMessage(transactionDetails);
+    const actual = generateMessage(transactionDetails);
     const expected =
       "Employee ID,Beverage,Quantity,Date\n11111,Orange,1,1234\n";
+    assert.deepStrictEqual(actual, expected);
+  });
+});
+
+describe("getTotalJuices", () => {
+  it("should give zero for empty record", () => {
+    const records = [];
+    const actual = getTotalJuices(records);
+    const expected = 0;
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should give two for two qty", () => {
+    const records = [{ qty: 1 }, { qty: 1 }];
+    const actual = getTotalJuices(records);
+    const expected = 2;
+    assert.deepStrictEqual(actual, expected);
+  });
+
+  it("should give NaN for a undefined or NaN qty", () => {
+    const records = [{ qty: 1 }, { qty: 1 }, { qty: undefined }];
+    const actual = getTotalJuices(records);
+    const expected = NaN;
     assert.deepStrictEqual(actual, expected);
   });
 });

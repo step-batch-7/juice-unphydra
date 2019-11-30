@@ -1,5 +1,5 @@
 const performQuery = function(records, args) {
-  let { empId, beverage, date } = args;
+  let { empId, beverage, date } = args.options;
   let matchedWithEmpId = matchedWith(empId, "empId");
   let matchedWithBeverage = matchedWith(beverage, "beverage");
   let isDateMatched = matchedDate(date);
@@ -26,5 +26,4 @@ const filterReq = function(records, action) {
   return records.filter(action);
 };
 
-exports.performQuery = performQuery;
-exports.filterReq = filterReq;
+module.exports = { performQuery, filterReq };

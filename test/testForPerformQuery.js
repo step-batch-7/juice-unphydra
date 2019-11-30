@@ -1,10 +1,9 @@
 const assert = require("assert");
-const performQuery = require("../src/performQueryLib.js").performQuery;
-const filterReq = require("../src/performQueryLib.js").filterReq;
+const { performQuery, filterReq } = require("../src/performQueryLib.js");
 
 describe("performQuery", () => {
   it("should return empty record for empty args", () => {
-    const actual = performQuery([], {});
+    const actual = performQuery([], { options: {} });
     const expected = [];
     assert.deepStrictEqual(actual, expected);
   });
@@ -15,7 +14,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { date: "1234" };
+    const args = { options: { date: "1234" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Orange", qty: 1, date: "1234" },
@@ -30,7 +29,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { beverage: "Apple" };
+    const args = { options: { beverage: "Apple" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" }
@@ -44,7 +43,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { empId: 11111 };
+    const args = { options: { empId: 11111 } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Orange", qty: 1, date: "1234" },
@@ -59,7 +58,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { empId: 11111, date: "1233" };
+    const args = { options: { empId: 11111, date: "1233" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" }
@@ -73,7 +72,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { empId: 11111, beverage: "Apple" };
+    const args = { options: { empId: 11111, beverage: "Apple" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" }
@@ -87,7 +86,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11122, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { date: "1233", beverage: "Apple" };
+    const args = { options: { date: "1233", beverage: "Apple" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" }
@@ -101,7 +100,7 @@ describe("performQuery", () => {
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" },
       { empId: 11111, beverage: "Pineapple", qty: 2, date: "1234" }
     ];
-    const args = { empId: 11111, date: "1233", beverage: "Apple" };
+    const args = { options: { empId: 11111, date: "1233", beverage: "Apple" } };
     const actual = performQuery(records, args);
     const expected = [
       { empId: 11111, beverage: "Apple", qty: 1, date: "1233" }

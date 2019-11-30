@@ -2,3 +2,5 @@ node_modules/
 todo.txt
 .nyc*
 transactionData.json
+.DS_Store
+failures.txt
