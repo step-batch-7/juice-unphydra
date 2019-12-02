@@ -18,7 +18,8 @@ const matchedWith = function(value, key) {
 
 const matchedDate = function(value) {
   return function(orders) {
-    return orders.date.slice(0, 10) === value;
+    const stDate = orders.date.toJSON();
+    return stDate.slice(0, 10) === value;
   };
 };
 

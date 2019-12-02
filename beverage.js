@@ -5,7 +5,7 @@ const transactionRecorder = optionLib.transactionRecorder;
 const main = function() {
   const path = "./transactionData.json";
   const args = process.argv.slice(2);
-  const date = new Date().toJSON();
+  const date = new Date();
   const fsi = {
     readFileSync: fs.readFileSync,
     writeFileSync: fs.writeFileSync,

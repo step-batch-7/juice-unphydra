@@ -17,7 +17,7 @@ describe("transactionRecorder", () => {
     const actual = transactionRecorder(
       "./transactionData.json",
       [],
-      "232425",
+      new Date(),
       fs
     );
     const expected = "wrong Input";
@@ -36,16 +36,14 @@ describe("transactionRecorder", () => {
         return true;
       }
     };
+    const date = new Date();
     const actual = transactionRecorder(
       "somePath",
       ["--save", "--empId", "123", "--beverage", "Orange", "--qty", "2"],
-      "232425",
+      date,
       fs
     );
-    const expected =
-      "Transaction Recorded:\n" +
-      "Employee ID,Beverage,Quantity,Date\n" +
-      "123,Orange,2,232425\n";
+    const expected = `Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date\n123,Orange,2,${date.toJSON()}\n`;
     assert.deepStrictEqual(actual, expected);
   });
 

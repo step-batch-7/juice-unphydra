@@ -86,19 +86,19 @@ describe("writeRecords", () => {
 
 describe("generateMessage", () => {
   it("should give only heading if no transaction details is given", () => {
-    const transactionDetails = [{}];
+    const testDate = new Date();
+    const transactionDetails = [{ date: testDate }];
     const actual = generateMessage(transactionDetails);
-    const expected =
-      "Employee ID,Beverage,Quantity,Date\nundefined,undefined,undefined,undefined\n";
+    const expected = `Employee ID,Beverage,Quantity,Date\nundefined,undefined,undefined,${testDate.toJSON()}\n`;
     assert.deepStrictEqual(actual, expected);
   });
   it("should give transaction details of given transaction", () => {
+    const testDate = new Date();
     const transactionDetails = [
-      { empId: 11111, beverage: "Orange", qty: 1, date: 1234 }
+      { empId: 11111, beverage: "Orange", qty: 1, date: testDate }
     ];
     const actual = generateMessage(transactionDetails);
-    const expected =
-      "Employee ID,Beverage,Quantity,Date\n11111,Orange,1,1234\n";
+    const expected = `Employee ID,Beverage,Quantity,Date\n11111,Orange,1,${testDate.toJSON()}\n`;
     assert.deepStrictEqual(actual, expected);
   });
 });

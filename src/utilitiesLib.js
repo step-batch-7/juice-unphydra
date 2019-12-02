@@ -11,8 +11,9 @@ const writeRecords = function(path, writeFile, records, jsonString, encoder) {
 };
 
 const generateString = function(orders) {
-  let { empId, beverage, qty, date } = orders;
-  let message = `${empId},${beverage},${qty},${date}\n`;
+  const { empId, beverage, qty, date } = orders;
+  const stDate = date.toJSON();
+  let message = `${empId},${beverage},${qty},${stDate}\n`;
   return message;
 };
 
