@@ -2,7 +2,8 @@ const {
   getRecord,
   writeRecords,
   generateMessage,
-  getTotalJuices
+  getTotalJuices,
+  getErrorMsg
 } = require("../src/utilitiesLib.js");
 const parser = require("./parser.js").parser;
 const performSave = require("./performSaveLib.js").performSave;
@@ -12,7 +13,7 @@ const transactionRecorder = function(path, args, date, fs) {
   let message = "";
   const processedArgs = parser(args);
   if (!processedArgs.validation) {
-    return "wrong Input";
+    return getErrorMsg();
   }
   const records = getRecord(
     path,
@@ -30,7 +31,7 @@ const transactionRecorder = function(path, args, date, fs) {
   transactionDetails = performQuery(records, processedArgs);
   message = generateMessage(transactionDetails);
   let totalNoOfJuices = getTotalJuices(transactionDetails);
-  return `${message}Total: ${totalNoOfJuices}`;
+  return `${message}\nTotal: ${totalNoOfJuices}`;
 };
 
 exports.transactionRecorder = transactionRecorder;

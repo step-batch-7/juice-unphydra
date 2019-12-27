@@ -18,9 +18,10 @@ describe("getRecord", () => {
       return "[{a:1}]";
     };
     const jsonParse = function(args) {
-      return [{ a: 1 }];
+      return [{ a: 1, date: date.toJSON() }];
     };
     const encoder = "utf8";
+    const date = new Date();
 
     const actual = getRecord(
       "path",
@@ -29,7 +30,7 @@ describe("getRecord", () => {
       jsonParse,
       encoder
     );
-    const expected = [{ a: 1 }];
+    const expected = [{ a: 1, date: date }];
     assert.deepStrictEqual(actual, expected);
   });
   it("should give empty record", () => {
@@ -77,7 +78,13 @@ describe("writeRecords", () => {
       return "{}";
     };
 
-    const actual = writeRecords(path, writeFile, records, jsonString, encoder);
+    const actual = writeRecords(
+      path,
+      writeFile,
+      records,
+      jsonString,
+      encoder
+    );
     const expected = undefined;
     assert.deepStrictEqual(actual, expected);
     assert.deepStrictEqual(runCount, 1);
@@ -89,7 +96,7 @@ describe("generateMessage", () => {
     const testDate = new Date();
     const transactionDetails = [{ date: testDate }];
     const actual = generateMessage(transactionDetails);
-    const expected = `Employee ID,Beverage,Quantity,Date\nundefined,undefined,undefined,${testDate.toJSON()}\n`;
+    const expected = `Employee ID,Beverage,Quantity,Date\nundefined,undefined,undefined,${testDate.toJSON()}`;
     assert.deepStrictEqual(actual, expected);
   });
   it("should give transaction details of given transaction", () => {
@@ -98,7 +105,7 @@ describe("generateMessage", () => {
       { empId: 11111, beverage: "Orange", qty: 1, date: testDate }
     ];
     const actual = generateMessage(transactionDetails);
-    const expected = `Employee ID,Beverage,Quantity,Date\n11111,Orange,1,${testDate.toJSON()}\n`;
+    const expected = `Employee ID,Beverage,Quantity,Date\n11111,Orange,1,${testDate.toJSON()}`;
     assert.deepStrictEqual(actual, expected);
   });
 });

@@ -1,0 +1,4 @@
+(export JS_DATE="2019-12-01T14:33:49.427Z"; export JS_Data_PATH="./AppTests/testStore.json"; node beverage.js --save --empId 123 --beverage Apple --qty 2)
+Transaction Recorded:
+Employee ID,Beverage,Quantity,Date
+123,Apple,2,2019-12-01T14:33:49.427Z

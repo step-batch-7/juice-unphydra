@@ -14,13 +14,24 @@ describe("transactionRecorder", () => {
         return true;
       }
     };
+    let message = "please give a valid input\n";
+    message =
+      message +
+      "for save:\n--save --empId [EMPID] --beverage [BEV NAME] --qty [QUANTITY]\n";
+    message =
+      message +
+      "for query:\n--query --empId [EMPID]\n--beverage [BEV NAME]\n--date [dd-mm-yyyy]\n";
+    message =
+      message +
+      "--empId [EMPID] --beverage [BEV NAME]\n--beverage [BEV NAME] --date [dd-mm-yyyy]\n";
+    message = message + "--empId [EMPID] --date [dd-mm-yyyy]\n";
     const actual = transactionRecorder(
       "./transactionData.json",
       [],
       new Date(),
       fs
     );
-    const expected = "wrong Input";
+    const expected = message;
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -43,7 +54,7 @@ describe("transactionRecorder", () => {
       date,
       fs
     );
-    const expected = `Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date\n123,Orange,2,${date.toJSON()}\n`;
+    const expected = `Transaction Recorded:\nEmployee ID,Beverage,Quantity,Date\n123,Orange,2,${date.toJSON()}`;
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -65,7 +76,7 @@ describe("transactionRecorder", () => {
       "232425",
       fs
     );
-    const expected = "Employee ID,Beverage,Quantity,Date\n" + "Total: 0";
+    const expected = "Employee ID,Beverage,Quantity,Date\n\n" + "Total: 0";
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -87,7 +98,7 @@ describe("transactionRecorder", () => {
       "232425",
       fs
     );
-    const expected = "Employee ID,Beverage,Quantity,Date\n" + "Total: 0";
+    const expected = "Employee ID,Beverage,Quantity,Date\n\n" + "Total: 0";
     assert.deepStrictEqual(actual, expected);
   });
 
@@ -109,7 +120,7 @@ describe("transactionRecorder", () => {
       "232425",
       fs
     );
-    const expected = "Employee ID,Beverage,Quantity,Date\n" + "Total: 0";
+    const expected = "Employee ID,Beverage,Quantity,Date\n\n" + "Total: 0";
     assert.deepStrictEqual(actual, expected);
   });
 });

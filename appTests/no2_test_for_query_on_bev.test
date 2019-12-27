@@ -1,0 +1,4 @@
+(export JS_Data_PATH="./appTests/testStore.json"; node beverage.js --query --beverage Orange)
+Employee ID,Beverage,Quantity,Date
+11111,Orange,1,2019-12-01T14:36:17.084Z
+Total: 1

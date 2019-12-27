@@ -1,0 +1,12 @@
+(node beverage.js dontKnow)
+please give a valid input
+for save:
+--save --empId [EMPID] --beverage [BEV NAME] --qty [QUANTITY]
+for query:
+--query --empId [EMPID]
+--beverage [BEV NAME]
+--date [dd-mm-yyyy]
+--empId [EMPID] --beverage [BEV NAME]
+--beverage [BEV NAME] --date [dd-mm-yyyy]
+--empId [EMPID] --date [dd-mm-yyyy]
+
